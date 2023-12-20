@@ -16,5 +16,4 @@ public class Address extends BaseModel {
     private int postalCode;
     private String comments;
 
-
 }

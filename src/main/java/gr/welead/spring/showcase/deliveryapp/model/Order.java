@@ -23,4 +23,6 @@ public class Order extends BaseModel {
     private BigDecimal total;
     private PaymentMethod paymentMethod;
     private Coupon appliedCoupon;
+    private Store store; // from what I bought
+    private Customer customer;//me
 }
