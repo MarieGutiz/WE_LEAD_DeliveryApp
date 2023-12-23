@@ -2,11 +2,13 @@ package gr.welead.spring.showcase.deliveryapp.repository;
 
 import gr.welead.spring.showcase.deliveryapp.model.Store;
 import gr.welead.spring.showcase.deliveryapp.model.StoreCategory;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
+@Repository
 public class StoreRepositoryImpl extends BaseRepositoryImpl<Store> implements StoreRepository {
     @Override
     protected ConcurrentHashMap<Long, Store> getStorage() {

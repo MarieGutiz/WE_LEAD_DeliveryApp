@@ -2,12 +2,14 @@ package gr.welead.spring.showcase.deliveryapp.repository;
 
 import gr.welead.spring.showcase.deliveryapp.model.Order;
 import gr.welead.spring.showcase.deliveryapp.model.Store;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
+@Repository
 public class OrderRepositoryImpl extends BaseRepositoryImpl<Order> implements OrderRepository {
     private final ConcurrentHashMap<Long, Order> storage = new ConcurrentHashMap<>();
     private final AtomicLong sequence = new AtomicLong(0);
