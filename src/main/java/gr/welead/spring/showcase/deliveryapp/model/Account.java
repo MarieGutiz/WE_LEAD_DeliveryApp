@@ -18,5 +18,6 @@ public class Account extends BaseModel {
     private String password;
     private Role role;
     private Address address;
-    private LocalDateTime registeredDateTime;//The date of the account creation it has to be automatically
+    @Builder.Default
+    private LocalDateTime registeredDateTime = LocalDateTime.now();//The date of the account creation it has to be automatically
 }

@@ -16,7 +16,7 @@ public class Store extends BaseModel {
     private String storeDescription;
     private Double ranking;
     private StoreStatus status;//Are we open or close?
-    private String reviews;
+    private List<String> reviews;
     private Address address;
     private StoreCategory category;
     private List<Product> menu;//The store sells?

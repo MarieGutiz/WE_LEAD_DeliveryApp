@@ -4,6 +4,7 @@ import gr.welead.spring.showcase.deliveryapp.model.Store;
 import gr.welead.spring.showcase.deliveryapp.model.StoreCategory;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
@@ -34,5 +35,25 @@ public class StoreRepositoryImpl extends BaseRepositoryImpl<Store> implements St
                 .stream()
                 .filter(store -> store.getCategory() == category)
                 .toList();
+    }
+
+    @Override
+    public List<Store> findByCity(String city) {
+        return getStorage().values().stream()
+                .filter(store -> store.getAddress() != null && store.getAddress().getCity().equals(city))
+                .toList();
+    }
+
+    @Override
+    public void addReview(Long storeId, String review) {
+        Store store = getStorage().get(storeId);
+        if (store != null) {
+            if (store.getReviews() == null) {
+                store.setReviews(new ArrayList<>());
+            }
+            store.getReviews().add(review);
+            update(store);
+        }
+
     }
 }

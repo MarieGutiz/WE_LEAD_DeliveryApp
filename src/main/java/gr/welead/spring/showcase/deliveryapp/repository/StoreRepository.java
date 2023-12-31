@@ -12,4 +12,9 @@ public interface StoreRepository extends BaseRepository<Store, Long> {
     List<Store> findByName(String name);
 
     List<Store> findByCategory(StoreCategory category);
+
+    List<Store> findByCity(String city);
+
+    void addReview(Long storeId, String review);
+
 }
