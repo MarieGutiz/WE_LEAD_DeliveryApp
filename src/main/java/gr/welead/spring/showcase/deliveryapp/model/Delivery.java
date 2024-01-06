@@ -10,7 +10,8 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @ToString(callSuper = true)
 public class Delivery extends BaseModel {
-    private BigDecimal baseCost;
+    @Builder.Default
+    private BigDecimal baseCost = BigDecimal.valueOf(0.15);//standard price
     private BigDecimal additionTip;
     private AverageTime time;//time to delivery
 }

@@ -16,7 +16,7 @@ import java.util.Set;
 @ToString(callSuper = true)
 public class Order extends BaseModel {
     private LocalDateTime orderDate;
-    private final Set<OrderItem> orderItems = new HashSet<>();//
+    private final Set<OrderItem> orderItems = new HashSet<>();
     private OrderStatus orderStatus;
     private BigDecimal subTotal;
     private Delivery delivery;//Check
@@ -24,5 +24,5 @@ public class Order extends BaseModel {
     private PaymentMethod paymentMethod;
     private Coupon appliedCoupon;
     private Store store; // from what I bought
-    private Customer customer;//me
+    private Customer customer;
 }

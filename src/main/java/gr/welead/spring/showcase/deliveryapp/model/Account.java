@@ -14,10 +14,10 @@ import java.util.Date;
 public class Account extends BaseModel {
     private String firstName;
     private String lastName;
+    private Address address;
     private String email;
     private String password;
     private Role role;
-    private Address address;
     @Builder.Default
     private LocalDateTime registeredDateTime = LocalDateTime.now();//The date of the account creation it has to be automatically
 }

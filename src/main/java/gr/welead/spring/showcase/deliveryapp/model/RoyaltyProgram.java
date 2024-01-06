@@ -4,9 +4,11 @@ import lombok.*;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString(callSuper = true)
 public class RoyaltyProgram extends BaseModel {//For clients
-    private long points;
+    private Long points;
     private String programDescription;
-    private Customer customerAccount;
 }

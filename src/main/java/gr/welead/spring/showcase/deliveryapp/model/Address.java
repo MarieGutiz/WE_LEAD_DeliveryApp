@@ -2,9 +2,11 @@ package gr.welead.spring.showcase.deliveryapp.model;
 
 import lombok.*;
 
-@Getter
 @Setter
+@Getter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor()
 @ToString(callSuper = true)
 public class Address extends BaseModel {
     private String city;
@@ -15,4 +17,5 @@ public class Address extends BaseModel {
     private String departmentType;
     private int postalCode;
     private String comments;
+
 }
