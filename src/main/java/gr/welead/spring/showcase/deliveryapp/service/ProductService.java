@@ -28,7 +28,7 @@ public class ProductService {
         return products;
     }
 
-    //add new product
+    //add new product without category
     public void addProduct(Product product){
         productRepository.save(product);
         //saves topic to the database
@@ -60,4 +60,24 @@ public class ProductService {
             throw new IllegalArgumentException("Category with ID " + categoryId + " not found.");
         }
     }
+
+    //  get a product by name
+    public Optional<Product> findProductByName(String name) {
+        return productRepository.findByName(name);
+    }
+
+
+    // view products by product category
+
+    public List<Product> getProductsByCategory(ProductCategory productCategory) {
+        return productRepository.findByProductCategory(productCategory);
+    }
+
+
+
+
+
+
+
+
 }

@@ -1,6 +1,7 @@
 package gr.welead.spring.showcase.deliveryapp.controller;
 
 import gr.welead.spring.showcase.deliveryapp.model.Product;
+import gr.welead.spring.showcase.deliveryapp.model.ProductCategory;
 import gr.welead.spring.showcase.deliveryapp.service.ProductCategoryService;
 import gr.welead.spring.showcase.deliveryapp.service.ProductService;
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,6 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-
 public class ProductController {
     private final ProductService productService;
 
@@ -46,6 +46,7 @@ public class ProductController {
 
 
 
+    //add product with category
     @PostMapping("/products/{categoryId}/productswithcategory")
     public ResponseEntity<Product> createProductWithCategory(@RequestBody Product product, @PathVariable Long categoryId) {
         Product createdProduct = productService.createProductWithCategory(product, categoryId);
@@ -58,4 +59,28 @@ public class ProductController {
         productService.deleteProduct(id);
     }
 
+
+    //search product by name
+    ///searchproducts?name=frappe
+    @GetMapping("/searchproducts")
+    public Optional<Product> findProductByName(@RequestParam String name) {
+        return productService.findProductByName(name);
+    }
+
+
+    //  search for products by product category
+    @GetMapping("/productsbycategory/{categoryId}")
+    public ResponseEntity<List<Product>> getProductsByCategory(@PathVariable Long categoryId) {
+        Optional<ProductCategory> productCategory = productCategoryService.getProductCategoryById(categoryId);
+        if (productCategory.isPresent()) {
+            List<Product> products = productService.getProductsByCategory(productCategory.get());
+            return new ResponseEntity<>(products, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+
 }
+
+

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductCategoryService {
@@ -26,7 +27,7 @@ public class ProductCategoryService {
 
     public void addProductCategory(ProductCategory productCategory){
         productCategoryRepository.save(productCategory);
-        //saves topic to the database
+        //saves  to the database
     }
 
     //view all product categories
@@ -36,4 +37,11 @@ public class ProductCategoryService {
                 .forEach(productCategories::add);
         return productCategories;
     }
+
+
+    //get productcategory by id
+    public Optional<ProductCategory> getProductCategoryById(Long id) {
+        return productCategoryRepository.findById(id);
+    }
+
 }
