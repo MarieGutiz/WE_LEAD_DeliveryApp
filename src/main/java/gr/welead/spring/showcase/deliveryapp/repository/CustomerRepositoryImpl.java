@@ -22,14 +22,4 @@ public class CustomerRepositoryImpl extends BaseRepositoryImpl<Customer> impleme
         return sequence;
     }
 
-    @Override
-    public Customer findCustomerWithRoyaltyProgram(Long customerId) {
-        return getStorage().values()
-                .stream()
-                .filter(customer -> customer.getId().equals(customerId))
-                .map(customer -> (Customer) customer) // Cast to Customer
-                .filter(customer -> customer.getRoyaltyProgram() != null && customer.getRoyaltyProgram().getPoints() > 0)
-                .findFirst()
-                .orElse(null);
-    }
 }
