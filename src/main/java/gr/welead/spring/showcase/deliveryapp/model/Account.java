@@ -18,6 +18,7 @@ public class Account extends BaseModel {
     private String email;
     private String password;
     private Role role;
+    private Long customerId; // find customer by Id
     @Builder.Default
     private LocalDateTime registeredDateTime = LocalDateTime.now();//The date of the account creation it has to be automatically
 }
