@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -17,5 +18,11 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     // Spring Data JPA will generate the query for this method based on the method name
     Optional<Customer> findCustomerByAccount_Email(String email);
+
+    /////
+    Optional<Customer> findByAccount_FirstNameAndAccount_LastName(String firsName, String lastName);
+
+    Optional<Customer> findCustomerByAccount_Address_PhoneNumber(String phoneNumber);
+
 
 }
