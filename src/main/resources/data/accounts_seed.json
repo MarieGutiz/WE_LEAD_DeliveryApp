@@ -1,0 +1,84 @@
+{
+  "customers": [
+      {
+        "firstName": "Giannis",
+        "lastName": "Tsiaples",
+        "email": "gianni@email.com",
+        "password": "password123",
+        "role": "CUSTOMER",
+        "address": {
+          "city": "Athens",
+          "state": "Attica",
+          "phoneNumber": 1234127890,
+          "street": "Acropolis Street",
+          "floor": 2,
+          "departmentType": "Apartment",
+          "postalCode": 10558
+        },
+        "royaltyProgram": {
+          "points": 50,
+          "programDescription": "Silver Level"
+        }
+      },
+      {
+        "firstName": "Alice",
+        "lastName": "Johnson",
+        "email": "alice.johnson@email.com",
+        "password": "alice_password",
+        "role": "CUSTOMER",
+        "address": {
+          "city": "Thessaloniki",
+          "state": "Central Macedonia",
+          "phoneNumber": 9872243210,
+          "street": "Aristotelous Square",
+          "floor": 1,
+          "departmentType": "Condo",
+          "postalCode": 54625
+        },
+        "royaltyProgram": {
+          "points": 75,
+          "programDescription": "Gold Level"
+        }
+      },
+      {
+        "firstName": "Maria",
+        "lastName": "Papadopoulou",
+        "email": "maria.papa@email.com",
+        "password": "maria_password",
+        "role": "CUSTOMER",
+        "address": {
+          "city": "Larisa",
+          "state": "Thessaly",
+          "phoneNumber": 9872734560,
+          "street": "Liontaria Street",
+          "floor": 3,
+          "departmentType": "House",
+          "postalCode": 71234
+        },
+        "royaltyProgram": {
+          "points": 90,
+          "programDescription": "Platinum Level"
+        }
+      },
+      {
+        "firstName": "Nikos",
+        "lastName": "Papadopoulos",
+        "email": "nikos.papadopoulos@email.com",
+        "password": "nikos_password",
+        "role": "CUSTOMER",
+        "address": {
+          "city": "Patras",
+          "state": "Western Greece",
+          "phoneNumber": 9887765430,
+          "street": "Othonos-Amalias Avenue",
+          "floor": 5,
+          "departmentType": "Apartment",
+          "postalCode": 26221
+        },
+        "royaltyProgram": {
+          "points": 60,
+          "programDescription": "Gold Level"
+        }
+      }
+    ]
+}
