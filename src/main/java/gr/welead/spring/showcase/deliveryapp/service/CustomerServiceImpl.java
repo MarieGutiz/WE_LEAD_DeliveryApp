@@ -4,6 +4,7 @@ import gr.welead.spring.showcase.deliveryapp.model.Customer;
 import gr.welead.spring.showcase.deliveryapp.model.Order;
 import gr.welead.spring.showcase.deliveryapp.model.RoyaltyProgram;
 import gr.welead.spring.showcase.deliveryapp.repository.CustomerRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,8 +15,8 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class CustomerServiceImpl extends BaseServiceImpl<Customer> implements CustomerService{
- final CustomerRepository customerRepository;
+public class CustomerServiceImpl extends BaseServiceImpl<Customer> implements CustomerService {
+    final CustomerRepository customerRepository;
 
     @Override
     protected JpaRepository<Customer, Long> getRepository() {
@@ -60,4 +61,64 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer> implements Cu
         Optional<Customer> customer = customerRepository.findById(id);
         return customer.orElse(null);
     }
+
+    @Override
+    public List<Customer> getAllCustomers() {
+        return customerRepository.findAll();
+    }
+
+    @Override
+    public Optional<Customer> getCustomerById(Long customerId) {
+        return customerRepository.findById(customerId);
+    }
+
+    @Override
+    public Optional<Customer> getCustomerByEmail(String email) {
+        return this.findCustomerByAccount_Email(email);
+    }
+
+    @Override
+    public Optional<Customer> getCustomersByName(String firsName, String lastName) {
+        return customerRepository.findByAccount_FirstNameAndAccount_LastName(firsName, lastName);
+    }
+
+    @Override
+    public Optional<Customer> getCustomerByPhoneNumber(String phoneNumber) {
+        return customerRepository.findCustomerByAccount_Address_PhoneNumber(phoneNumber);
+    }
+
+    @Override
+    public Customer createCustomer(Customer customer) {
+        return customerRepository.save(customer);
+    }
+
+    @Override
+    public void deleteCustomer(Long customerId) {
+        Optional<Customer> customerToDelete = customerRepository.findById(customerId);
+        customerToDelete.ifPresent(customerRepository::delete);
+    }
+
+    @Override
+    public Customer updateCustomer(Long customerId, Customer updatedCustomer) {
+        Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
+
+        if (optionalCustomer.isPresent()) {
+            Customer existingCustomer = optionalCustomer.get();
+
+            // Update fields of existingCustomer with values from updatedCustomer
+            // Note: You may want to add null checks or handle specific cases based on your requirements
+            existingCustomer.setAccount(updatedCustomer.getAccount());
+            existingCustomer.setRoyaltyProgram(updatedCustomer.getRoyaltyProgram());
+            // ... update other fields as needed
+
+            // Save the updated customer
+            customerRepository.save(existingCustomer);
+
+            return existingCustomer;
+        } else {
+            // Handle the case where the customer with the given ID is not found
+            throw new EntityNotFoundException("Customer with id " + customerId + " not found");
+        }
+    }
+
 }

@@ -47,16 +47,4 @@ public class Address extends BaseModel {
     @Column(nullable = true)
     private String comment;
 
-//    @ToString.Exclude
-//    @EqualsAndHashCode.Exclude
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "account_id", nullable = true)
-//    private Account account;
-//
-//    @ToString.Exclude
-//    @EqualsAndHashCode.Exclude
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "store_id", nullable = true)
-//    private Store store;
-
 }
