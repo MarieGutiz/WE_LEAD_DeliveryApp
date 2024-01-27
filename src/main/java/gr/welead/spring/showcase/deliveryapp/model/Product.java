@@ -38,10 +38,6 @@ public class Product extends BaseModel {
     @ManyToOne(fetch = FetchType.LAZY)
     private Store store;
 
-    //The offers
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    private Offer offer;
-
     //The products with offers
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ProductOffer> productOffers = new HashSet<>();

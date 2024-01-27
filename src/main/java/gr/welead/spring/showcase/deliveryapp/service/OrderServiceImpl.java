@@ -5,7 +5,7 @@ import gr.welead.spring.showcase.deliveryapp.repository.CouponRepository;
 import gr.welead.spring.showcase.deliveryapp.repository.CustomerRepository;
 import gr.welead.spring.showcase.deliveryapp.repository.OrderRepository;
 import gr.welead.spring.showcase.deliveryapp.repository.ProductOfferRepository;
-import gr.welead.spring.showcase.deliveryapp.transfer.OrderDetailsReportByCustomerId;
+import gr.welead.spring.showcase.deliveryapp.transfer.OrderDetailsReport;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -418,8 +418,13 @@ public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderSer
     }
 
     @Override
-    public List<OrderDetailsReportByCustomerId[]> findOrdersDetailsByCustomerId(Long customerId) {
+    public List<OrderDetailsReport[]> findOrdersDetailsByCustomerId(Long customerId) {
         return orderRepository.findOrdersDetailsByCustomerId(customerId);
+    }
+
+    @Override
+    public List<OrderDetailsReport[]> findOrdersDetailsByAll() {
+        return orderRepository.findOrdersDetailsByAll();
     }
 
 
