@@ -1,0 +1,265 @@
+{
+  "accounts": [
+    {
+      "firstName": "Kerasina",
+      "lastName": "Tsiava",
+      "role": "STORE_ADMIN",
+      "password": "sample_password",
+      "email": "davinci@email.com"
+    },
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "role": "STORE_ADMIN",
+      "password": "johns_password",
+      "email": "john@email.com"
+    },
+    {
+      "firstName": "Alice",
+      "lastName": "Johnson",
+      "role": "STORE_ADMIN",
+      "password": "alices_password",
+      "email": "alice@email.com"
+    },
+    {
+      "firstName": "Giannis",
+      "lastName": "Saxos",
+      "role": "STORE_ADMIN",
+      "password": "saxos_password",
+      "email": "cazzadelapizza@email.com"
+    }
+  ],
+  "addresses": [
+    {
+      "city": "Larisa",
+      "state": "Thessaly",
+      "phoneNumber": 1234567670,
+      "street": "Afxentioy Grigorioy",
+      "floor": 0,
+      "departmentType": "Isogeio",
+      "postalCode": 12345
+    },
+    {
+      "city": "Athens",
+      "state": "Attica",
+      "phoneNumber": 9876543210,
+      "street": "Syntagma Square",
+      "floor": 1,
+      "departmentType": "Main",
+      "postalCode": 54321
+    },
+    {
+      "city": "Thessaloniki",
+      "state": "Central Macedonia",
+      "phoneNumber": 5555555555,
+      "street": "Aristotelous Square",
+      "floor": 2,
+      "departmentType": "Main",
+      "postalCode": 67890
+    },
+    {
+      "city": "Larisa",
+      "state": "Thessaly",
+      "phoneNumber": 6739999534,
+      "street": "Aristotelous Square",
+      "floor": 1,
+      "departmentType": "Main",
+      "postalCode": 41222
+    }
+  ],
+  "products": [
+    {
+      "name": "Cappuccino",
+      "serial": "CAP-001",
+      "price": 2.50,
+      "category": "Coffee"
+    },
+    {
+      "name": "Latte",
+      "serial": "LAT-001",
+      "price": 3.00,
+      "category": "Coffee"
+    },
+    {
+      "name": "Espresso",
+      "serial": "ESP-001",
+      "price": 2.00,
+      "category": "Coffee"
+    },
+    {
+      "name": "Baguette",
+      "serial": "BAG-001",
+      "price": 4.50,
+      "category": "Pastry"
+    },
+    {
+      "name": "Croissant",
+      "serial": "CRO-001",
+      "price": 2.00,
+      "category": "Pastry"
+    },
+    {
+      "name": "Orange Juice",
+      "serial": "OJ-001",
+      "price": 1.50,
+      "category": "Juice"
+    },
+    {
+      "name": "Salmon Steak",
+      "serial": "SAL-001",
+      "price": 15.00,
+      "category": "Meat"
+    },
+    {
+      "name": "Vegetarian Pasta",
+      "serial": "PAS-001",
+      "price": 12.00,
+      "category": "Pasta"
+    },
+    {
+      "name": "Chocolate Fondant",
+      "serial": "CHO-001",
+      "price": 4.00,
+      "category": "Drink"
+    },
+    {
+      "name": "Bolognese Pasta",
+      "serial": "PAS-002",
+      "price": 12.00,
+      "category": "Pasta"
+    },
+    {
+      "name": "Pizza Margaritta",
+      "serial": "PIZZA-001",
+      "price": 10.00,
+      "category": "Pasta"
+    },
+    {
+      "name": "Espresso Americano",
+      "serial": "AME-001",
+      "price": 3.50,
+      "category": "Coffee"
+    },
+    {
+      "name": "Chocolate Viennois",
+      "serial": "CHV-008",
+      "price": 4.80,
+      "category": "Drink"
+    }
+  ],
+  "stores": [
+    {
+      "name": "DaVinci cafe",
+      "afm": 123456789,
+      "storeDescription": "Cafeteria",
+      "ranking": 4.8,
+      "status": "isOpen",
+      "reviews": [
+        {
+          "comment": "Nice coffee",
+          "rating": 8
+        },
+        {
+          "comment": "Owner was gentle",
+          "rating": 3
+        },
+        {
+          "comment": "Nice place for children too.",
+          "rating": 4
+        }
+      ],
+      "addressId": 2,
+      "category": "COFFEE_AND_BEVERAGES",
+      "menu": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "averageTime": "00:12:00",
+      "accountId": 2
+    },
+    {
+      "name": "Coffee Haven",
+      "afm": 987654321,
+      "storeDescription": "Cozy Coffee Shop",
+      "ranking": 4.0,
+      "status": "isOpen",
+      "reviews": [
+        {
+          "comment": "Prices are reasonable",
+          "rating": 5
+        },
+        {
+          "comment": "Excellent coffee selection",
+          "rating": null
+        }
+      ],
+      "addressId": 3,
+      "category": "COFFEE_AND_BEVERAGES",
+      "menu": [
+        3,
+        6,
+        9
+      ],
+      "averageTime": "00:15:00",
+      "accountId": 3
+    },
+    {
+      "name": "Cazza De la pizza",
+      "afm": 555123455,
+      "storeDescription": "Best pizza in town",
+      "ranking": 4.8,
+      "status": "isOpen",
+      "reviews": [
+        {
+          "comment": "Best pizza in Larisa",
+          "rating": 1
+        },
+        {
+          "comment": "Friendly staff",
+          "rating": 4
+        },
+        {
+          "comment": "Prices are reasonable",
+          "rating": 5
+        }
+      ],
+      "addressId": 5,
+      "category": "RESTAURANT",
+      "menu": [
+        7,
+        8,
+        10,
+        11
+      ],
+      "averageTime": "00:12:00",
+      "accountId": 5
+    },
+    {
+      "name": "Bean Palace",
+      "afm": 555555555,
+      "storeDescription": "Artisan Coffee House",
+      "ranking": 4.5,
+      "status": "isOpen",
+      "reviews": [
+        {
+          "comment": "Prices are reasonable",
+          "rating": 5
+        },
+        {
+          "comment": "Great atmosphere",
+          "rating": null
+        }
+      ],
+      "addressId": 4,
+      "category": "COFFEE_AND_BEVERAGES",
+      "menu": [
+        12,
+        13
+      ],
+      "averageTime": "00:10:00",
+      "accountId": 4
+    }
+  ]
+}
