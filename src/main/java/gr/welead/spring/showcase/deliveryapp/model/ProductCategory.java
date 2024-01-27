@@ -1,28 +1,23 @@
 package gr.welead.spring.showcase.deliveryapp.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
-
-import java.util.List;
 
 @Getter
 @Setter
 @Builder
 @ToString(callSuper = true)
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-
-public class ProductCategory  {
-
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    private Long id;
+@Table(name = "CATEGORIES")
+@SequenceGenerator(name = "idGenerator", sequenceName = "CATEGORIES_SEQ", initialValue = 1, allocationSize = 1)
+public class ProductCategory extends BaseModel {
+    @NotNull
+    @Column(length = 50, nullable = false)
     private String description;
-
-    @OneToMany(mappedBy="productCategory")
-    @JsonIgnore
-    private List<Product> products;
 }
