@@ -6,7 +6,7 @@ import gr.welead.spring.showcase.deliveryapp.model.PaymentMethod;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public interface OrderDetailsReportByCustomerId {
+public interface OrderDetailsReport {
     Long getOrder_id();
 
     LocalDateTime getOrderDate();

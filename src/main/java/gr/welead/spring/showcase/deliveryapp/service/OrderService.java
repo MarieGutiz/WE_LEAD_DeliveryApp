@@ -1,7 +1,7 @@
 package gr.welead.spring.showcase.deliveryapp.service;
 
 import gr.welead.spring.showcase.deliveryapp.model.*;
-import gr.welead.spring.showcase.deliveryapp.transfer.OrderDetailsReportByCustomerId;
+import gr.welead.spring.showcase.deliveryapp.transfer.OrderDetailsReport;
 import jakarta.transaction.Transactional;
 import org.springframework.data.repository.query.Param;
 
@@ -44,5 +44,7 @@ public interface OrderService extends BaseService<Order, Long> {
 
     List<Order> findOrdersByCustomer(Customer customer);
 
-    List<OrderDetailsReportByCustomerId[]> findOrdersDetailsByCustomerId(@Param("customerId") Long customerId);
+    List<OrderDetailsReport[]> findOrdersDetailsByCustomerId(@Param("customerId") Long customerId);
+
+    List<OrderDetailsReport[]> findOrdersDetailsByAll();
 }
