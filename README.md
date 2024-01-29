@@ -114,9 +114,12 @@ Famous-Stores-In-General: true
 
 ## Configuration
 
-==
+Despite facing challenges, our team successfully fulfilled the primary project requirements and went above and beyond by incorporating additional features, including:
 
-
+- Loyalty Program: We implemented a loyalty program designed to incentivize customers to choose our store regularly. This program includes a reward system where customers earn points for their transactions. These points unlock various benefits, creating a more engaging and rewarding shopping experience.
+  
+- Special Product Offers: In addition to the core functionality, we introduced special offers on specific products. This feature allows us to dynamically adjust prices, run limited-time promotions, and provide personalized discounts. 
+These extra features not only meet the project's objectives but also contribute to a more competitive and customer-centric application. We believe these additions will positively impact user engagement, loyalty, and overall satisfaction with our platform.
 
 ## License
 
@@ -124,8 +127,8 @@ MIT License
 
 ## Meet the team
 
--The developers that worked on this project:
+The developers that worked on this project:
 - Mariela Gutiérrez
 - Magdalini Kentroti
-- Paraskevi Tzevelekou
 - Maria Eleni Kasteli
+- Paraskevi Tzevelekou
