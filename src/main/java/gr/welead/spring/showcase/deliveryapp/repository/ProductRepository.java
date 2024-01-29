@@ -2,6 +2,7 @@ package gr.welead.spring.showcase.deliveryapp.repository;
 
 import gr.welead.spring.showcase.deliveryapp.model.Product;
 import gr.welead.spring.showcase.deliveryapp.model.ProductCategory;
+import gr.welead.spring.showcase.deliveryapp.model.Store;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -20,6 +21,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByCategory(final ProductCategory productCategory);
 
     public List<Product> findAllByIdIn(List<Long> ids);
+    public List<Product> findByStore(Store store);
 
 
 }

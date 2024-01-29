@@ -49,6 +49,7 @@ public class ProductCategoryImpl extends BaseServiceImpl<ProductCategory> implem
 
 
     //get productcategory by id
+
     public Optional<ProductCategory> getProductCategoryById(Long id) {
         return productCategoryRepository.findById(id);
     }

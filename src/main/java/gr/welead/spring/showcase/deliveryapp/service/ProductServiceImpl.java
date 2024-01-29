@@ -101,10 +101,18 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 
     // view products by product category
 
+
     public List<Product> getProductsByCategory(ProductCategory productCategory) {
         return productRepository.findByCategory(productCategory);
     }
 
+    // get product by store
+    public List<Product> getProductsByStore(Store store) {
+        return productRepository.findByStore(store);
+    }
+
+
+    //create product for a store with category
     public Product createProductWithStoreAndCategory(Product product, Long storeId, Long categoryId) {
         Optional<Store> optionalStore = storeRepository.findById(storeId);
         Optional<ProductCategory> optionalProductCategory = productCategoryRepository.findById(categoryId);
