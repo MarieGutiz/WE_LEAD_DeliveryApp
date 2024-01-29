@@ -27,6 +27,8 @@ public interface ProductService extends BaseService<Product, Long> {
 
     Product createProductWithCategory(Product product, Long categoryId);
 
+    Product createProductWithStoreAndCategory(Product product, Long storeId, Long categoryId);
+
     Product findProductByName(String name);
 
     List<Product> getProductsByCategory(ProductCategory productCategory);

@@ -1,11 +1,16 @@
 package gr.welead.spring.showcase.deliveryapp.controller;
 
+import gr.welead.spring.showcase.deliveryapp.mapper.BaseMapper;
+import gr.welead.spring.showcase.deliveryapp.mapper.ProductMapper;
 import gr.welead.spring.showcase.deliveryapp.model.Product;
 import gr.welead.spring.showcase.deliveryapp.model.ProductCategory;
 //import gr.welead.spring.showcase.deliveryapp.service.ProductCategoryService;
 //import gr.welead.spring.showcase.deliveryapp.service.ProductService;
+import gr.welead.spring.showcase.deliveryapp.service.BaseService;
 import gr.welead.spring.showcase.deliveryapp.service.ProductCategoryService;
 import gr.welead.spring.showcase.deliveryapp.service.ProductService;
+import gr.welead.spring.showcase.deliveryapp.transfer.resource.ProductResource;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,16 +19,39 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-public class ProductController {
+@RequestMapping("products")
+@RequiredArgsConstructor
+public class ProductController extends BaseController<Product, ProductResource>{
     private final ProductService productService;
-
+    private final ProductMapper productMapper;
     private final ProductCategoryService productCategoryService;
 
 
-    public ProductController(ProductService productService, ProductCategoryService productCategoryService) {
-        this.productService = productService;
-        this.productCategoryService = productCategoryService;
+
+    @Override
+    protected BaseService<Product,Long> getBaseService(){
+        return productService;
     }
+
+    @Override
+    protected BaseMapper<Product, ProductResource> getMapper() {
+        return productMapper;
+
+    }
+
+
+    //post product with product category and store
+    //create?storeId=1&categoryId=1
+    @PostMapping("/create")
+    public ResponseEntity<Product> createProductWithStoreAndCategory(@RequestBody Product product,
+                                                                     @RequestParam Long storeId,
+                                                                     @RequestParam Long categoryId) {
+        //Product createdProduct = ProductMapper.INSTANCE.toDomain(productResource);
+        Product createdProductWithStoreAndCategory = productService.createProductWithStoreAndCategory(product, storeId, categoryId);
+        return new ResponseEntity<>(createdProductWithStoreAndCategory, HttpStatus.CREATED);
+    }
+
+
 
 
     @RequestMapping("/products")

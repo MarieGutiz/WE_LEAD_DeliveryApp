@@ -2,8 +2,10 @@ package gr.welead.spring.showcase.deliveryapp.service;
 
 import gr.welead.spring.showcase.deliveryapp.model.Product;
 import gr.welead.spring.showcase.deliveryapp.model.ProductCategory;
+import gr.welead.spring.showcase.deliveryapp.model.Store;
 import gr.welead.spring.showcase.deliveryapp.repository.ProductCategoryRepository;
 import gr.welead.spring.showcase.deliveryapp.repository.ProductRepository;
+import gr.welead.spring.showcase.deliveryapp.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import java.util.Optional;
 public class ProductServiceImpl extends BaseServiceImpl<Product> implements ProductService {
     final ProductRepository productRepository;
     final ProductCategoryRepository productCategoryRepository;
+    final StoreRepository storeRepository;
 
     @Override
     protected JpaRepository<Product, Long> getRepository() {
@@ -100,6 +103,22 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 
     public List<Product> getProductsByCategory(ProductCategory productCategory) {
         return productRepository.findByCategory(productCategory);
+    }
+
+    public Product createProductWithStoreAndCategory(Product product, Long storeId, Long categoryId) {
+        Optional<Store> optionalStore = storeRepository.findById(storeId);
+        Optional<ProductCategory> optionalProductCategory = productCategoryRepository.findById(categoryId);
+
+        if (optionalStore.isPresent() && optionalProductCategory.isPresent()) {
+            Store store = optionalStore.get();
+            ProductCategory productCategory = optionalProductCategory.get();
+            product.setStore(store);
+            product.setCategory(productCategory);
+            return productRepository.save(product);
+        } else {
+
+            throw new IllegalArgumentException("Store with ID " + storeId + " or Product category with id "+ categoryId + " not found.");
+        }
     }
 
 }
