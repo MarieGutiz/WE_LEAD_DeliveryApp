@@ -418,12 +418,12 @@ public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderSer
     }
 
     @Override
-    public List<OrderDetailsReport[]> findOrdersDetailsByCustomerId(Long customerId) {
+    public List<OrderDetailsReport> findOrdersDetailsByCustomerId(Long customerId) {
         return orderRepository.findOrdersDetailsByCustomerId(customerId);
     }
 
     @Override
-    public List<OrderDetailsReport[]> findOrdersDetailsByAll() {
+    public List<OrderDetailsReport> findOrdersDetailsByAll() {
         return orderRepository.findOrdersDetailsByAll();
     }
 

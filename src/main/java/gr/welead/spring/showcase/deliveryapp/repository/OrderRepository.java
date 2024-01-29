@@ -49,7 +49,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             "LEFT JOIN o.orderItems oi " +
             "LEFT JOIN oi.product p " +
             "WHERE c.id = :customerId")
-    List<OrderDetailsReport[]> findOrdersDetailsByCustomerId(@Param("customerId") Long customerId);
+    List<OrderDetailsReport> findOrdersDetailsByCustomerId(@Param("customerId") Long customerId);
 
 //    @Query(value = "${}", nativeQuery = true)
 //    List<OrderDetailsReport[]> findOrdersDetailsByCustomerId(@Param("customerId") Long customerId);
@@ -76,5 +76,5 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             "JOIN o.store s " +
             "LEFT JOIN o.orderItems oi " +
             "LEFT JOIN oi.product p ")
-    List<OrderDetailsReport[]> findOrdersDetailsByAll();
+    List<OrderDetailsReport> findOrdersDetailsByAll();
 }
