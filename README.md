@@ -12,7 +12,7 @@ WE LEAD delivery app created with Spring Boot - 2023-2024.
     - [Installation](#installation)
     - [Usage](#usage)
 - [Endpoints](#endpoints)
-- [Configuration](#configuration)
+- [Extra Features](#extra-features)
 - [Contributing](#contributing)
 - [License](#license)
 - [Meet The Team](#meet-the-team)
@@ -112,7 +112,7 @@ Famous-Stores-In-General: true
   ```http
   GET http://localhost:8080/stores?category=COFFEE_AND_BEVERAGES
 
-## Configuration
+## Extra Features
 
 Despite facing challenges, our team successfully fulfilled the primary project requirements and went above and beyond by incorporating additional features, including:
 
