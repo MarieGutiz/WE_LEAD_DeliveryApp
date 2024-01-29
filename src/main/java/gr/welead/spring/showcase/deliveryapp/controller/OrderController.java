@@ -38,30 +38,30 @@ public class OrderController extends BaseController<Order, OrderResource> {
     }
 
     @GetMapping("/customer/{customerId}")
-    public ResponseEntity<ApiResponse<List<OrderDetailsReport[]>>> getOrdersByCustomer(@PathVariable Long customerId) {
+    public ResponseEntity<ApiResponse<List<OrderDetailsReport>>> getOrdersByCustomer(@PathVariable Long customerId) {
         Customer customer = customerService.findById(customerId);
 
         if (customer == null) {
             return ResponseEntity.notFound().build();
         }
 
-        List<OrderDetailsReport[]> orders = orderService.findOrdersDetailsByCustomerId(customer.getId());
+        List<OrderDetailsReport> orders = orderService.findOrdersDetailsByCustomerId(customer.getId());
 //        logger.info("orders {} ", orders);
 
         return ResponseEntity.ok(
-                ApiResponse.<List<OrderDetailsReport[]>>builder()
+                ApiResponse.<List<OrderDetailsReport>>builder()
                         .data(orders)
                         .build()
         );
     }
 
     @GetMapping("/details/all")
-    public ResponseEntity<ApiResponse<List<OrderDetailsReport[]>>> getAllOrderDetails() {
-        List<OrderDetailsReport[]> orderDetailsList = orderService.findOrdersDetailsByAll();
+    public ResponseEntity<ApiResponse<List<OrderDetailsReport>>> getAllOrderDetails() {
+        List<OrderDetailsReport> orderDetailsList = orderService.findOrdersDetailsByAll();
 
         logger.info("orders {} ", orderDetailsList);
         return ResponseEntity.ok(
-                ApiResponse.<List<OrderDetailsReport[]>>builder()
+                ApiResponse.<List<OrderDetailsReport>>builder()
                         .data(orderDetailsList)
                         .build()
         );
