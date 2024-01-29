@@ -2,6 +2,7 @@ package gr.welead.spring.showcase.deliveryapp.service;
 
 import gr.welead.spring.showcase.deliveryapp.model.Product;
 import gr.welead.spring.showcase.deliveryapp.model.ProductCategory;
+import gr.welead.spring.showcase.deliveryapp.model.Store;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +28,12 @@ public interface ProductService extends BaseService<Product, Long> {
 
     Product createProductWithCategory(Product product, Long categoryId);
 
+    Product createProductWithStoreAndCategory(Product product, Long storeId, Long categoryId);
+
     Product findProductByName(String name);
 
     List<Product> getProductsByCategory(ProductCategory productCategory);
+
+    List<Product> getProductsByStore(Store store);
 }
+

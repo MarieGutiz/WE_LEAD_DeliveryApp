@@ -1,11 +1,19 @@
 package gr.welead.spring.showcase.deliveryapp.controller;
 
+import gr.welead.spring.showcase.deliveryapp.mapper.BaseMapper;
+import gr.welead.spring.showcase.deliveryapp.mapper.ProductMapper;
 import gr.welead.spring.showcase.deliveryapp.model.Product;
 import gr.welead.spring.showcase.deliveryapp.model.ProductCategory;
 //import gr.welead.spring.showcase.deliveryapp.service.ProductCategoryService;
 //import gr.welead.spring.showcase.deliveryapp.service.ProductService;
+import gr.welead.spring.showcase.deliveryapp.model.Store;
+import gr.welead.spring.showcase.deliveryapp.service.BaseService;
 import gr.welead.spring.showcase.deliveryapp.service.ProductCategoryService;
 import gr.welead.spring.showcase.deliveryapp.service.ProductService;
+import gr.welead.spring.showcase.deliveryapp.service.StoreService;
+import gr.welead.spring.showcase.deliveryapp.transfer.ApiResponse;
+import gr.welead.spring.showcase.deliveryapp.transfer.resource.ProductResource;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,42 +22,63 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-public class ProductController {
+@RequestMapping("products")
+@RequiredArgsConstructor
+public class ProductController extends BaseController<Product, ProductResource>{
     private final ProductService productService;
-
+    private final ProductMapper productMapper;
     private final ProductCategoryService productCategoryService;
+    private final StoreService storeService;
 
 
-    public ProductController(ProductService productService, ProductCategoryService productCategoryService) {
-        this.productService = productService;
-        this.productCategoryService = productCategoryService;
+
+    @Override
+    protected BaseService<Product,Long> getBaseService(){
+        return productService;
+    }
+
+    @Override
+    protected BaseMapper<Product, ProductResource> getMapper() {
+        return productMapper;
+
     }
 
 
-    @RequestMapping("/products")
-    public List<Product> getAllProducts() {
-        return productService.getAllProducts();
+    //post product with product category and store
+    //create?storeId=1&categoryId=1
+    @PostMapping("/create")
+    public ResponseEntity<Product> createProductWithStoreAndCategory(@RequestBody Product product,
+                                                                     @RequestParam Long storeId,
+                                                                     @RequestParam Long categoryId) {
+        Product createdProductWithStoreAndCategory = productService.createProductWithStoreAndCategory(product, storeId, categoryId);
+        return new ResponseEntity<>(createdProductWithStoreAndCategory, HttpStatus.CREATED);
     }
 
-    @RequestMapping("products/{id}")
-    public Optional<Product> getProduct(@PathVariable Long id) {
-        return productService.getProduct(id);
+    @GetMapping(params = "serial")
+    public ResponseEntity<ApiResponse<ProductResource>> findBySerial(@RequestParam String serial) {
+        final ProductResource productResource = getMapper().toResource(productService.findBySerial(serial));
+        return ResponseEntity.ok(ApiResponse.<ProductResource>builder().data(productResource).build());
+    }
+
+    @GetMapping("products")
+    public ResponseEntity<List<ProductResource>> getAllProducts() {
+        List<Product> products = productService.getAllProducts();
+        if (!products.isEmpty()){
+            List<ProductResource> productsResources = getMapper().toResources(products);
+            return  new ResponseEntity<>(productsResources, HttpStatus.OK);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    //find product by id
+    @GetMapping(params = "id")
+    public ResponseEntity<ProductResource> getProduct(@RequestParam Long id){
+        final ProductResource productResource =getMapper().toResource(productService.get(id));
+        return new ResponseEntity<>(productResource, HttpStatus.OK);
     }
 
 
-    //add product without category
-    @RequestMapping(method = RequestMethod.POST, value = "/products")
-    public void addProduct(@RequestBody Product product) {
-        productService.addProduct(product);
-    }
-
-
-    //add product with category
-    @PostMapping("/products/{categoryId}/productswithcategory")
-    public ResponseEntity<Product> createProductWithCategory(@RequestBody Product product, @PathVariable Long categoryId) {
-        Product createdProduct = productService.createProductWithCategory(product, categoryId);
-        return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
-    }
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/products/{id}")
@@ -61,22 +90,32 @@ public class ProductController {
     //search product by name
     ///searchproducts?name=frappe
     @GetMapping("/searchproducts")
-    public Product findProductByName(@RequestParam String name) {
-        return productService.findProductByName(name);
+    public ResponseEntity<ProductResource> findProductByName(@RequestParam String name){
+        Optional<Product> product = Optional.ofNullable(productService.findProductByName(name));
+        if (product.isPresent()){
+            ProductResource productResource = getMapper().toResource(productService.findByName(name));
+            return new ResponseEntity<>(productResource, HttpStatus.OK);
+        }else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 
-    //  search for products by product category
-    @GetMapping("/productsbycategory/{categoryId}")
-    public ResponseEntity<List<Product>> getProductsByCategory(@PathVariable Long categoryId) {
-        Optional<ProductCategory> productCategory = productCategoryService.getProductCategoryById(categoryId);
-        if (productCategory.isPresent()) {
-            List<Product> products = productService.getProductsByCategory(productCategory.get());
-            return new ResponseEntity<>(products, HttpStatus.OK);
-        } else {
+    //get products by store
+
+    @GetMapping("/productsbystore/{storeId}")
+    public ResponseEntity<List<ProductResource>> getProductsByStore(@PathVariable Long storeId){
+        Optional<Store> store = Optional.ofNullable(storeService.get(storeId));
+        if (store.isPresent()){
+            List<Product> products =productService.getProductsByStore(store.get());
+            List<ProductResource> productResources = getMapper().toResources(products);
+            return new ResponseEntity<>(productResources, HttpStatus.OK);
+        }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+
 
 
 }

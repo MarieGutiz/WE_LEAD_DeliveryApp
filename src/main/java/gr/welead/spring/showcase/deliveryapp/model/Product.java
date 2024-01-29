@@ -1,5 +1,6 @@
 package gr.welead.spring.showcase.deliveryapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -32,13 +33,16 @@ public class Product extends BaseModel {
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
     private ProductCategory category;
 
     //The products from the store
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private Store store;
 
     //The products with offers
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private Set<ProductOffer> productOffers = new HashSet<>();
 }
