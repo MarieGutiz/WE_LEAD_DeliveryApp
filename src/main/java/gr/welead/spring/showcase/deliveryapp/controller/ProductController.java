@@ -9,6 +9,7 @@ import gr.welead.spring.showcase.deliveryapp.model.ProductCategory;
 import gr.welead.spring.showcase.deliveryapp.service.BaseService;
 import gr.welead.spring.showcase.deliveryapp.service.ProductCategoryService;
 import gr.welead.spring.showcase.deliveryapp.service.ProductService;
+import gr.welead.spring.showcase.deliveryapp.transfer.ApiResponse;
 import gr.welead.spring.showcase.deliveryapp.transfer.resource.ProductResource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -51,33 +52,30 @@ public class ProductController extends BaseController<Product, ProductResource>{
         return new ResponseEntity<>(createdProductWithStoreAndCategory, HttpStatus.CREATED);
     }
 
-
-
-
-    @RequestMapping("/products")
-    public List<Product> getAllProducts() {
-        return productService.getAllProducts();
+    @GetMapping(params = "serial")
+    public ResponseEntity<ApiResponse<ProductResource>> findBySerial(@RequestParam String serial) {
+        final ProductResource productResource = getMapper().toResource(productService.findBySerial(serial));
+        return ResponseEntity.ok(ApiResponse.<ProductResource>builder().data(productResource).build());
     }
 
-    @RequestMapping("products/{id}")
-    public Optional<Product> getProduct(@PathVariable Long id) {
-        return productService.getProduct(id);
+    @GetMapping("products")
+    public ResponseEntity<List<ProductResource>> getAllProducts() {
+        List<Product> products = productService.getAllProducts();
+        if (!products.isEmpty()){
+            List<ProductResource> productsResources = getMapper().toResources(products);
+            return  new ResponseEntity<>(productsResources, HttpStatus.OK);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping(params = "id")
+    public ResponseEntity<ProductResource> getProduct(@RequestParam Long id){
+        final ProductResource productResource =getMapper().toResource(productService.get(id));
+        return new ResponseEntity<>(productResource, HttpStatus.OK);
     }
 
 
-    //add product without category
-    @RequestMapping(method = RequestMethod.POST, value = "/products")
-    public void addProduct(@RequestBody Product product) {
-        productService.addProduct(product);
-    }
-
-
-    //add product with category
-    @PostMapping("/products/{categoryId}/productswithcategory")
-    public ResponseEntity<Product> createProductWithCategory(@RequestBody Product product, @PathVariable Long categoryId) {
-        Product createdProduct = productService.createProductWithCategory(product, categoryId);
-        return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
-    }
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/products/{id}")
