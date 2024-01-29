@@ -15,6 +15,8 @@ WE LEAD delivery app created with Spring Boot - 2023-2024.
 - [Configuration](#configuration)
 - [Contributing](#contributing)
 - [License](#license)
+- [Meet The Team}((#meet-the-team)
+  
 
 ## Overview
 
@@ -113,7 +115,17 @@ Famous-Stores-In-General: true
 ## Configuration
 
 ==
+
+
+
 ## License
 
 MIT License
 
+## Meet the team
+
+-The developers that worked on this project:
+- Mariela Gutierez
+- Magdalini Kentrioti
+- Paraskevi Tzevelekou
+- Maria Eleni Kasteli
