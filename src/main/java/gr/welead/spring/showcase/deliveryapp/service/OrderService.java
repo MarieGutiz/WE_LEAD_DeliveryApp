@@ -44,7 +44,7 @@ public interface OrderService extends BaseService<Order, Long> {
 
     List<Order> findOrdersByCustomer(Customer customer);
 
-    List<OrderDetailsReport[]> findOrdersDetailsByCustomerId(@Param("customerId") Long customerId);
+    List<OrderDetailsReport> findOrdersDetailsByCustomerId(@Param("customerId") Long customerId);
 
-    List<OrderDetailsReport[]> findOrdersDetailsByAll();
+    List<OrderDetailsReport> findOrdersDetailsByAll();
 }
