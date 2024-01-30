@@ -111,6 +111,11 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
         return productRepository.findByStore(store);
     }
 
+    @Override
+    public List<Product> findProductsByCategoryName(String description){
+        return productRepository.findByCategoryDescription(description);
+    }
+
 
     //create product for a store with category
     public Product createProductWithStoreAndCategory(Product product, Long storeId, Long categoryId) {

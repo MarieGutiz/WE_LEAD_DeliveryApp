@@ -115,6 +115,19 @@ public class ProductController extends BaseController<Product, ProductResource>{
         }
     }
 
+    //    //  search for products by product category
+    @GetMapping("/productsbycategory/{description}")
+    public ResponseEntity<List<ProductResource>> getProductsByCategory(@PathVariable String description) {
+        List<Product> productCategories = productService.findProductsByCategoryName(description);
+        if (!productCategories.isEmpty()) {
+            //List<Product> products = productService.getProductsByCategory(productCategories.g);
+            List<ProductResource> productResources =getMapper().toResources(productCategories);
+            return new ResponseEntity<>(productResources, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 
 
 

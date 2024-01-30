@@ -37,4 +37,6 @@ public class ProductCategoryController {
     public void addProductCategory(@RequestBody ProductCategory productCategory) {
         productCategoryService.addProductCategory(productCategory);
     }
+
+
 }
