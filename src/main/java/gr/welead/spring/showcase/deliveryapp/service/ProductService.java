@@ -35,5 +35,7 @@ public interface ProductService extends BaseService<Product, Long> {
     List<Product> getProductsByCategory(ProductCategory productCategory);
 
     List<Product> getProductsByStore(Store store);
+
+    List<Product> findProductsByCategoryName(String description);
 }
 

@@ -54,6 +54,8 @@ public class ProductController extends BaseController<Product, ProductResource>{
         return new ResponseEntity<>(createdProductWithStoreAndCategory, HttpStatus.CREATED);
     }
 
+    //find product by serial
+    ///products?serial=s2
     @GetMapping(params = "serial")
     public ResponseEntity<ApiResponse<ProductResource>> findBySerial(@RequestParam String serial) {
         final ProductResource productResource = getMapper().toResource(productService.findBySerial(serial));
@@ -72,6 +74,7 @@ public class ProductController extends BaseController<Product, ProductResource>{
     }
 
     //find product by id
+    ///products/2
     @GetMapping(params = "id")
     public ResponseEntity<ProductResource> getProduct(@RequestParam Long id){
         final ProductResource productResource =getMapper().toResource(productService.get(id));
@@ -102,6 +105,7 @@ public class ProductController extends BaseController<Product, ProductResource>{
 
 
     //get products by store
+    ///products/productsbystore/2
 
     @GetMapping("/productsbystore/{storeId}")
     public ResponseEntity<List<ProductResource>> getProductsByStore(@PathVariable Long storeId){
@@ -111,6 +115,19 @@ public class ProductController extends BaseController<Product, ProductResource>{
             List<ProductResource> productResources = getMapper().toResources(products);
             return new ResponseEntity<>(productResources, HttpStatus.OK);
         }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    //    //  search for products by product category
+    ///products/productsbycategory/Coffee
+    @GetMapping("/productsbycategory/{description}")
+    public ResponseEntity<List<ProductResource>> getProductsByCategory(@PathVariable String description) {
+        List<Product> productCategories = productService.findProductsByCategoryName(description);
+        if (!productCategories.isEmpty()) {
+            List<ProductResource> productResources =getMapper().toResources(productCategories);
+            return new ResponseEntity<>(productResources, HttpStatus.OK);
+        } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
